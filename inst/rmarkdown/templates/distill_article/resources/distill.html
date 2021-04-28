@@ -926,6 +926,21 @@ d-footnote-list a.footnote-backlink {
 }
 
 
+@keyframes highlight-target {
+  0% {
+    background-color: #ffa;
+  }
+  66% {
+    background-color: #ffa;
+  }
+  100% {
+    background-color: none;
+  }
+}
+
+d-article :target, d-appendix :target {
+   animation: highlight-target 3s;
+}
 
 </style>
 
