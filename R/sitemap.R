@@ -23,7 +23,7 @@ write_search_json <- function(site_dir, config) {
       article <- list()
       article$path = as_utf8(html_file)
       article$title <- as_utf8(metadata$title)
-      article$description <- as_utf8(metadata$description)
+      article$description <- as_utf8(metadata$abstract)
       article$author = lapply(metadata$author, function(author) {
         list(
           name = as_utf8(author$name),
@@ -164,7 +164,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
   }
 
   # we can't write an rss feed if there is no description
-  if (is.null(collection$description)) {
+  if (is.null(collection$abstract)) {
     rendering_note("Not creating feed for", collection$name,
                    "(no description provided)")
     return(NULL)
@@ -273,7 +273,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
       }
     }
     else {
-      add_child(item, "description", text = not_null(article$description, default = article$title))
+      add_child(item, "description", text = not_null(article$abstract, default = article$title))
     }
 
     if (!is.null(article$categories)) {
