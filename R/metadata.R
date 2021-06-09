@@ -610,10 +610,16 @@ front_matter_from_metadata <- function(metadata) {
       orcidID = not_null(author$orcid, "")
     )
   })
+
   if (!is.null(metadata$date)) {
     if (is.character(metadata$date))
       metadata$date <- parse_date(metadata$date)
-    front_matter$publishedDate <- date_as_iso_8601(metadata$date)
+    front_matter$submittedDate <- date_as_iso_8601(metadata$date)
+  }
+  if (!is.null(metadata$date_published)) {
+    if (is.character(metadata$date_published))
+      metadata$date_published <- parse_date(metadata$date_published)
+    front_matter$publishedDate <- date_as_iso_8601(metadata$date_published)
   }
   if (!is.null(metadata$concatenated_authors) && !is.null(metadata$published_year)) {
     front_matter$citationText <- sprintf("%s, %s",
