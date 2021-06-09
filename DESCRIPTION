@@ -1,13 +1,16 @@
 Type: Package
-Package: distill
-Title: 'R Markdown' Format for Scientific and Technical Writing
+Package: rjdistill
+Title: 'R Markdown' Format for Articles in The R Journal.
 Version: 1.2.4
 Authors@R: c(
-    person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com",
+    person("Mitchell", "O'Hara-Wild", role = c("aut", "cre"), email = "mail@mitchelloharawild.com",
+           comment = c(ORCID = "0000-0001-6729-7695")),
+    person("JJ", "Allaire", role = c("aut"), email = "jj@rstudio.com",
            comment = c(ORCID = "0000-0003-0174-9868")),
     person("Rich", "Iannone", role = c("aut")),
     person("Alison", "Presmanes Hill", role = c("aut"), comment = c(ORCID = "0000-0002-8082-1890")),
     person("Yihui", "Xie", role = c("aut"), comment = c(ORCID = "0000-0003-0645-5666")),
+    person(family = "The R Foundation", role = "cph"),
     person(family = "RStudio, Inc.", role = "cph"),
     person(family = "Google LLC", role = c("ctb", "cph"), 
            comment = "https://distill.pub/guide/"),
@@ -20,12 +23,13 @@ Authors@R: c(
     person("Gábor", "Csárdi", role = c("ctb", "cph"), comment = "whoami"),
     person("JooYoung", "Seo", role="ctb", comment = c(ORCID = "0000-0002-4064-6012"))
     )
-Description: Scientific and technical article format for the web. 'Distill' articles 
-    feature attractive, reader-friendly typography, flexible layout options
-    for visualizations, and full support for footnotes and citations.
+Description: Article format for The R Journal, adapted from the distill package
+    for R. 'Distill' articles feature attractive, reader-friendly typography,
+    flexible layout options for visualizations, and full support for footnotes
+    and citations.
 License: Apache License 2.0
-URL: https://github.com/rstudio/distill, https://pkgs.rstudio.com/distill
-BugReports: https://github.com/rstudio/distill/issues
+URL: https://github.com/rjournal/rjdistill
+BugReports: https://github.com/rjournal/rjdistill/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
