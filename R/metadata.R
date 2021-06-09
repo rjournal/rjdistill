@@ -607,7 +607,7 @@ front_matter_from_metadata <- function(metadata) {
       authorURL = not_null(author$url, "#"),
       affiliation = not_null(author$affiliation, "&nbsp;"),
       affiliationURL = not_null(author$affiliation_url, "#"),
-      orcidID = not_null(author$orcid_id, "")
+      orcidID = not_null(author$orcid, "")
     )
   })
   if (!is.null(metadata$date)) {
