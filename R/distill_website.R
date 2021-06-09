@@ -214,7 +214,7 @@ non_distill_format <- function(input_file) {
 
 alt_format_in_header_file <- function() {
   system.file("rmarkdown/templates/distill_article/resources/alt-format.html",
-              package = "distill")
+              package = "rjdistill")
 }
 
 

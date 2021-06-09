@@ -133,7 +133,7 @@ rjournal_web_article <- function(toc = FALSE,
     # determine metadata_includes
     metadata_output <- metadata[["output"]]
     if (is.list(metadata_output)) {
-      metadata_distill <- metadata_output[["distill::distill_article"]]
+      metadata_distill <- metadata_output[["rjdistill::rjournal_web_article"]]
       if (is.list(metadata_distill)) {
         metadata_includes <<- metadata_distill[["includes"]]
       }
