@@ -12,7 +12,6 @@
 #' For further details about theming refer to the
 #' [online documentation](https://rstudio.github.io/distill/website.html#theming).
 #'
-#' @export
 create_theme  <- function(name = "theme", edit = TRUE) {
   css <- file_with_ext(name, "css")
   if (!file.exists(css))

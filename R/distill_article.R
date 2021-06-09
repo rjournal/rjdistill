@@ -1,7 +1,8 @@
 
 
-#' R Markdown format for Distill articles
+#' R Markdown format for web articles in The R Journal
 #'
+#' Article format for The R Journal, adapted from the distill package for R.
 #' Scientific and technical writing, native to the web.
 #'
 #' Distill articles feature attractive, reader-friendly typography, flexible
@@ -36,7 +37,7 @@
 #' @import downlit
 #'
 #' @export
-distill_article <- function(toc = FALSE,
+rjournal_web_article <- function(toc = FALSE,
                           toc_depth = 3,
                           toc_float = TRUE,
                           fig_width = 6.5,

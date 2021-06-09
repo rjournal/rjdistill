@@ -18,7 +18,6 @@
 #'  (it may not complete if, for example, the user chose not to import an article
 #'  that lacked a creative commons license).
 #'
-#' @export
 import_post <- function(url, slug = "auto",
                         date = Sys.Date(),
                         date_prefix = date,
@@ -38,7 +37,6 @@ import_post <- function(url, slug = "auto",
 }
 
 #' @rdname import_post
-#' @export
 update_post <- function(slug, view = interactive()) {
   update_article("posts", slug, view)
 }

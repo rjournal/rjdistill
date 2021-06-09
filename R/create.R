@@ -20,7 +20,6 @@
 #' library(distill)
 #' create_website("mysite", "My Site")
 #' }
-#' @export
 create_website <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
   do_create_website(dir, title, gh_pages, edit, "website")
   render_website(dir, "website")
@@ -29,7 +28,6 @@ create_website <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 
 
 #' @rdname create_website
-#' @export
 create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 
   # create the website
@@ -111,7 +109,6 @@ create_article <- function(file,
 #' create_post("My Post")
 #' }
 #'
-#' @export
 create_post <- function(title,
                         collection = "posts",
                         author = "auto",
@@ -253,7 +250,6 @@ Learn more about using Distill at <https://rstudio.github.io/distill>.
 #' rename_post_dir("_posts/2020-09-12-my-post", date_prefix = "9/15/2020")
 #' }
 #'
-#' @export
 rename_post_dir <- function(post_dir, slug = "auto", date_prefix = "auto") {
 
   # determine site_dir (must call from within a site)
