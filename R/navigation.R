@@ -53,13 +53,13 @@ navigation_in_header_html <- function(site_config, offset) {
 
     navbar_html <- html_from_file(
       system.file("rmarkdown/templates/distill_article/resources/navbar.html",
-                  package = "distill")
+                  package = "rjdistill")
     )
 
     if (site_search_enabled(site_config)) {
       search_html <- html_from_file(
         system.file("rmarkdown/templates/distill_article/resources/search.html",
-                    package = "distill")
+                    package = "rjdistill")
       )
     } else {
       search_html <- NULL
@@ -239,7 +239,7 @@ navigation_after_body_html <- function(site_dir, site_config, offset) {
   footer <- file.path(site_dir, "_footer.html")
   if (!is.null(site_config$navbar) && file.exists(footer)) {
     footer_template <- system.file("rmarkdown/templates/distill_article/resources/footer.html",
-                                   package = "distill")
+                                   package = "rjdistill")
     footer_html <- tempfile(fileext = "html")
     pandoc_convert(
       input = normalize_path(footer),

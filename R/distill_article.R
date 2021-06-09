@@ -452,7 +452,7 @@ distill_in_header_file <- function(theme = NULL) {
 distill_in_header_html <- function(theme = NULL) {
   distill_html <- html_from_file(
     system.file("rmarkdown/templates/distill_article/resources/distill.html",
-                package = "distill")
+                package = "rjdistill")
   )
   theme_html <- theme_in_header_html(theme)
   placeholder_html("distill", distill_html, theme_html)

@@ -404,7 +404,7 @@ render_website <- function(dir, type) {
 render_template <- function(file, type, target_path, data = list()) {
   message("Creating ", file.path(target_path, file))
   template <- system.file(file.path("rstudio", "templates", "project", type, file),
-                          package = "distill")
+                          package = "rjdistill")
   template <- paste(readLines(template, encoding = "UTF-8"), collapse = "\n")
   output <- whisker::whisker.render(template, data)
   if (!dir_exists(target_path))

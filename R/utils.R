@@ -254,7 +254,7 @@ is_windows <- function() {
 # function for resolving resources
 distill_resource <- function(name) {
   system.file("rmarkdown/templates/distill_article/resources", name,
-              package = "distill")
+              package = "rjdistill")
 }
 
 knitr_files_dir <- function(file) {
