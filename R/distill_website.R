@@ -4,7 +4,8 @@
 #'
 #' @inheritParams rmarkdown::default_site_generator
 #'
-distill_website <- function(input, encoding = getOption("encoding"), ...) {
+#' @export
+rjdistill_website <- function(input, encoding = getOption("encoding"), ...) {
 
   # create an output format filter that allows for alternate output formats
   config <- site_config(input, encoding)
