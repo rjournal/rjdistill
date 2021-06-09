@@ -159,6 +159,7 @@ rjournal_web_article <- function(toc = FALSE,
 
     # provide a default date of today for in_collection
     if (is.null(metadata[["date"]]) && in_collection) {
+      stop("The article requires a date to be specified")
       metadata$date <- date_today()
       args <- c(args, pandoc_variable_arg("date", metadata$date))
     }
