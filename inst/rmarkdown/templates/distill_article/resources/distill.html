@@ -1133,9 +1133,9 @@ function init_distill() {
     if (!have_affiliations)
       $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
 
-    // dates
-    if (!front_matter.submittedDate && !front_matter.publishedDate)
-      hide_byline_column("Published");
+    // published date
+    // if (!front_matter.publishedDate)
+    //   hide_byline_column("Published");
 
     // document object identifier
     var doi = $('d-byline').find('h3:contains("DOI")');
