@@ -41,8 +41,8 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
     metadata$title <- "Untitled"
 
   # trim ws from description
-  if (!is.null(metadata$description))
-    metadata$description <- trimws(metadata$description)
+  if (!is.null(metadata$abstract))
+    metadata$description <- trimws(metadata$abstract)
 
   # if the site has a base_url then we need to tweak the base url of the
   # input document to use the site

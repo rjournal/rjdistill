@@ -164,7 +164,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
   }
 
   # we can't write an rss feed if there is no description
-  if (is.null(collection$abstract)) {
+  if (is.null(collection$description)) {
     rendering_note("Not creating feed for", collection$name,
                    "(no description provided)")
     return(NULL)
