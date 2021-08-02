@@ -123,6 +123,14 @@ rjournal_web_article <- function(toc = FALSE,
 
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
+    # If it is an article, produce PDF
+    if(!is.null(metadata$abstract)) {
+      rmarkdown::render(
+        input_file,
+        output_format = "rticles::rjournal_article",
+        clean = FALSE
+      )
+    }
 
     # save encoding
     encoding <<- encoding
