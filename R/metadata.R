@@ -287,9 +287,10 @@ metadata_html <- function(site_config, metadata, self_contained, offset = NULL) 
   article_meta <- list()
   if (!is.null(metadata$date)) {
     date <- format.Date(metadata$date, "%Y-%m-%d")
+    date_published <- format.Date(metadata$date_published, "%Y-%m-%d")
     article_meta <- tagList(
       HTML("<!--  https://schema.org/Article -->"),
-      tags$meta(property="article:published", itemprop="datePublished", content=date),
+      tags$meta(property="article:published", itemprop="datePublished", content=date_published),
       tags$meta(property="article:created", itemprop="dateCreated", content=date)
     )
   }
