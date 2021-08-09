@@ -124,10 +124,11 @@ rjournal_web_article <- function(toc = FALSE,
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
     # If it is an article, produce PDF
-    if(!is.null(metadata$abstract)) {
+    if(!is.null(metadata$type)) {
       rmarkdown::render(
         input_file,
-        output_format = "rticles::rjournal_article",
+        # output_format = "rticles::rjournal_article",
+        output_format = "rjdistill::rjournal_pdf_article",
         clean = FALSE
       )
     }
@@ -323,6 +324,27 @@ rjournal_web_article <- function(toc = FALSE,
     fmt$pandoc$lua_filters)
 
   fmt
+}
+
+#' @param self_contained Currently unused.
+#' @inherit rticles::rjournal_article
+#' @export
+rjournal_pdf_article <- function(..., self_contained = FALSE) {
+  fmt <- rticles::rjournal_article(...)
+  post_process <- fmt$post_processor
+  fmt$post_processor <- function(...) {
+    sty_origin <- list.files(system.file("tex", package = "rjdistill"),
+                             full.names = TRUE)
+    sty_dest <- file.path(".", basename(sty_origin))
+    copied <- file.copy(sty_origin, sty_dest)
+    on.exit(unlink(sty_dest[copied]))
+    post_process(...)
+  }
+  output_format(
+    knitr = knitr_options(),
+    pandoc = pandoc_options(to = "latex", ext = ".tex"),
+    base_format = fmt
+  )
 }
 
 distill_highlighting_args <- function(highlight) {
