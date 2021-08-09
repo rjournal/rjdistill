@@ -292,7 +292,7 @@ rjournal_web_article <- function(toc = FALSE,
   }
 
   # return format
-  output_format(
+  fmt <- output_format(
     knitr = knitr_options,
     pandoc = pandoc_options(to = "html5",
                             from = from_rmarkdown(fig_caption, md_extensions),
@@ -316,6 +316,13 @@ rjournal_web_article <- function(toc = FALSE,
       ...
     )
   )
+
+
+  fmt$pandoc$lua_filters <- c(
+    rmarkdown::pandoc_path_arg(system.file("latex-pkg.lua", package = "rjdistill")),
+    fmt$pandoc$lua_filters)
+
+  fmt
 }
 
 distill_highlighting_args <- function(highlight) {
