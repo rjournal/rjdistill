@@ -121,17 +121,12 @@ rjournal_web_article <- function(toc = FALSE,
   # (as opposed to site level includes which we already process)
   metadata_includes <- list()
 
+  rmd_path <- NULL
+
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
-    # If it is an article, produce PDF
-    if(!is.null(metadata$type)) {
-      rmarkdown::render(
-        input_file,
-        # output_format = "rticles::rjournal_article",
-        output_format = "rjdistill::rjournal_pdf_article",
-        clean = FALSE
-      )
-    }
+    # save rmd path
+    rmd_path <<- input_file
 
     # save encoding
     encoding <<- encoding
@@ -302,7 +297,7 @@ rjournal_web_article <- function(toc = FALSE,
     clean_supporting = self_contained,
     post_knit = post_knit,
     pre_processor = pre_processor,
-    post_processor = distill_article_post_processor(function() encoding, self_contained),
+    post_processor = distill_article_post_processor(function() encoding, self_contained, rmd_path),
     on_exit = on_exit,
     base_format = html_document_base(
       smart = smart,
@@ -340,11 +335,12 @@ rjournal_pdf_article <- function(..., self_contained = FALSE) {
     on.exit(unlink(sty_dest[copied]))
     post_process(...)
   }
-  output_format(
-    knitr = knitr_options(),
-    pandoc = pandoc_options(to = "latex", ext = ".tex"),
-    base_format = fmt
-  )
+  # output_format(
+  #   knitr = knitr_options(),
+  #   pandoc = pandoc_options(to = "latex", ext = ".tex"),
+  #   base_format = fmt
+  # )
+  fmt
 }
 
 distill_highlighting_args <- function(highlight) {

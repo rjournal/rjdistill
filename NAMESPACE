@@ -2,6 +2,7 @@
 
 export(create_article)
 export(rjdistill_website)
+export(rjournal_pdf_article)
 export(rjournal_web_article)
 import(downlit)
 import(htmltools)
