@@ -153,12 +153,13 @@ distill_article_post_processor <- function(encoding_fn, self_contained, rmd_path
   function(metadata, input_file, output_file, clean, verbose) {
     # If it is an article, produce PDF
     if(!is.null(metadata$type)) {
-      rmarkdown::render(
-        rmd_path,
-        # output_format = "rticles::rjournal_article",
-        output_format = "rjdistill::rjournal_pdf_article",
-        clean = FALSE
-      )
+      callr::r(function(input){
+        rmarkdown::render(
+          input,
+          # output_format = "rticles::rjournal_article",
+          output_format = "rjdistill::rjournal_pdf_article"
+        )
+      }, args = list(input = rmd_path))
     }
 
     # resolve bookdown-style figure cross references
