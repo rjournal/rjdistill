@@ -219,7 +219,7 @@ distill_article_post_processor <- function(encoding_fn, self_contained, rmd_path
     }
 
     # If it is an article, produce PDF
-    if(!is.null(metadata$type)) {
+    if(!is.null(metadata$author)) {
       callr::r(function(input){
         rmarkdown::render(
           input,
