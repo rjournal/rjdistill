@@ -164,58 +164,63 @@ distill_article_post_processor <- function(encoding_fn, self_contained, rmd_path
 
     # is the input file at the top level of a site? if it is then no post processing
     site_config <- site_config(input_file, encoding)
-    if (!is.null(site_config))
-      return(output_file)
+    is_site <- !is.null(site_config)
 
-    # is the input file in a site? if not then no post processing
-    site_dir <- find_site_dir(input_file)
-    if (is.null(site_dir))
-      return(output_file)
+    if (is_site){
+      # is the input file in a site? if not then no post processing
+      site_dir <- find_site_dir(input_file)
+      is_site <- !is.null(site_dir)
+    }
 
-    # get the site config
-    site_config <- site_config(site_dir, encoding)
 
-    # is this file in a collection? if not then no post processing
-    collections <- site_collections(site_dir, site_config)
-    input_file_relative <- rmarkdown::relative_to(
-      normalize_path(site_dir),
-      normalize_path(input_file)
-    )
-    in_collection <- startsWith(input_file_relative, paste0("_", names(collections), "/"))
-    if (!any(in_collection))
-      return(output_file)
+    if (is_site) {
+      # get the site config
+      site_config <- site_config(site_dir, encoding)
 
-    # get the collection
-    collection <- collections[[which(in_collection)]]
-
-    # compute the article path
-    article_site_path <- file.path(dirname(input_file_relative), output_file)
-    article_path <- file.path(site_dir, article_site_path)
-
-    # if this is a draft then remove any existing output folder,
-    # otherwise proceed with rendering
-    if (isTRUE(metadata$draft)) {
-
-      output_dir <- collection_article_output_dir(site_dir, site_config, article_site_path)
-      if (dir_exists(output_dir))
-        unlink(output_dir, recursive = TRUE)
-
-      out <- output_file
-
-    } else {
-
-      # publish article
-      output_file <- publish_collection_article_to_site(
-        site_dir, site_config, encoding, collection, article_path, metadata,
-        strip_trailing_newline = TRUE,
-        input_file = input_file
+      # is this file in a collection? if not then no post processing
+      collections <- site_collections(site_dir, site_config)
+      input_file_relative <- rmarkdown::relative_to(
+        normalize_path(site_dir),
+        normalize_path(input_file)
       )
+      in_collection <- startsWith(input_file_relative, paste0("_", names(collections), "/"))
+      if (!any(in_collection))
+        return(output_file)
 
-      # return the output_file w/ an attribute indicating that
-      # base post processing should be done on both the new
-      # and original output file
-      out <- structure(output_file, post_process_original = TRUE)
+      # get the collection
+      collection <- collections[[which(in_collection)]]
 
+      # compute the article path
+      article_site_path <- file.path(dirname(input_file_relative), output_file)
+      article_path <- file.path(site_dir, article_site_path)
+
+      # if this is a draft then remove any existing output folder,
+      # otherwise proceed with rendering
+      if (isTRUE(metadata$draft)) {
+
+        output_dir <- collection_article_output_dir(site_dir, site_config, article_site_path)
+        if (dir_exists(output_dir))
+          unlink(output_dir, recursive = TRUE)
+
+        out <- output_file
+
+      } else {
+
+        # publish article
+        output_file <- publish_collection_article_to_site(
+          site_dir, site_config, encoding, collection, article_path, metadata,
+          strip_trailing_newline = TRUE,
+          input_file = input_file
+        )
+
+        # return the output_file w/ an attribute indicating that
+        # base post processing should be done on both the new
+        # and original output file
+        out <- structure(output_file, post_process_original = TRUE)
+
+      }
+    } else {
+      out <- output_file
     }
 
     # If it is an article, produce PDF
